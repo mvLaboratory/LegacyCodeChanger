@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
+using LegacyCodeSearcher;
+
 
 namespace LegacyCodeChanger
 {
@@ -27,6 +29,7 @@ namespace LegacyCodeChanger
 
         public void doSearch()
         {
+            Program searcher = new Program();
             Console.WriteLine(ProjectFolder);
         }
 
