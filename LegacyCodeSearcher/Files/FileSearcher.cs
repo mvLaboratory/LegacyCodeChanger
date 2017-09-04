@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 
@@ -6,27 +7,39 @@ namespace LegacyCodeSearcher
 {
     class FileSearcher
     {
-        public String DirectoryPath { get; set; }
-
-        public List<String> GetFilesList()
+        public static List<DirectoryItem> GetFilesList(String directoryPath)
         {
             String[] dirs = new String[] { };
-            List<String> result = new List<String>();
+            String[] files = new String[] { };
+            List<DirectoryItem> result = new List<DirectoryItem>();
 
             try
             {
-                dirs = Directory .GetDirectories(DirectoryPath);
+                dirs = Directory.GetDirectories(directoryPath);
             }
             catch (Exception ex)
             { 
                 dirs = new String[] { };
             }
 
-            var files = Directory.GetFiles(DirectoryPath);
+            try
+            {
+                files = Directory.GetFiles(directoryPath);
+            }
+            catch (Exception ex)
+            {
+                dirs = new String[] { };
+            }
+            
+            result.AddRange(dirs.Select(item => new DirectoryItem(Path.GetFileName(item), item, true)));
+            result.AddRange(files.Select(item => new DirectoryItem(Path.GetFileName(item), item, false)));
 
-
-            result.AddRange(dirs);
             return result;
+        }
+
+        public static DirectoryItem CreateDirectoryItem(String folderPath)
+        {
+            return new DirectoryItem(Path.GetFileName(folderPath), folderPath, File.GetAttributes(folderPath).HasFlag(FileAttributes.Directory));
         }
     }
 }

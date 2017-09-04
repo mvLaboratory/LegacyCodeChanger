@@ -10,13 +10,14 @@ namespace LegacyCodeSearcher
     {
         public List<String> doSearch(String folder, String serchedText) 
         {
+            DirectoryStructure dirs = new DirectoryStructure(folder);
+            dirs.buildStructure();
             List<String> result = new List<string>();
-            List<String> files = new List<string>();
+            //List<String> files = new List<string>();
 
-            FileSearcher fileSearcher = new FileSearcher();
-            fileSearcher.DirectoryPath = folder;
-            files = fileSearcher.GetFilesList();
-
+            //FileSearcher fileSearcher = new FileSearcher();
+            //fileSearcher.DirectoryPath = folder;
+            //files = fileSearcher.GetFilesList();
 
             return result;
         }
