@@ -11,8 +11,12 @@ namespace LegacyCodeSearcher
         public List<String> doSearch(String folder, String serchedText) 
         {
             List<String> result = new List<string>();
+            List<String> files = new List<string>();
 
-            result.Add("dsfsdsf");
+            FileSearcher fileSearcher = new FileSearcher();
+            fileSearcher.DirectoryPath = folder;
+            files = fileSearcher.GetFilesList();
+
 
             return result;
         }
