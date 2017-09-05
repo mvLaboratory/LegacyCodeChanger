@@ -28,7 +28,7 @@ namespace LegacyCodeSearcher
             }
             catch (Exception ex)
             {
-                dirs = new String[] { };
+                files = new String[] { };
             }
             
             result.AddRange(dirs.Select(item => new DirectoryItem(Path.GetFileName(item), item, true)));

@@ -11,17 +11,24 @@ namespace LegacyCodeSearcher
 
         public DirectoryStructure(String initialPath)
         {
-            InitialPath = initialPath; 
-        }
+            InitialPath = initialPath;
 
-        public void buildStructure()
-        {
             if (InitialPath == null)
             {
                 throw new ArgumentException("initialPath");
             }
+
+            buildStructure();
+        }
+
+        private void buildStructure()
+        {
             DirectoryItem initialItem = FileSearcher.CreateDirectoryItem(InitialPath);
             Item = initialItem;
+        }
+
+        public override String ToString() {
+            return InitialPath;
         }
     }
 }

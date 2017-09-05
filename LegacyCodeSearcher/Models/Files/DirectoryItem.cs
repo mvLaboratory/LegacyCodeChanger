@@ -8,7 +8,7 @@ namespace LegacyCodeSearcher
         public String Name { get; set; }
         public String FullPath { get; set; }
         public bool IsFolder { get; set; }
-        public List<DirectoryItem> Childrens { get; }
+        public IEnumerable<DirectoryItem> Childrens { get; }
 
         public DirectoryItem(String name, String fullPath, bool isFolder)
         {
@@ -20,7 +20,7 @@ namespace LegacyCodeSearcher
             {
                 throw new ArgumentException("FullPath");
             }
-            Childrens = findChildrens();
+            Childrens = isFolder ? findChildrens() : new List<DirectoryItem>();
         }
 
         public DirectoryItem(String name, String fullPath) : this(name, fullPath, false)
@@ -34,6 +34,11 @@ namespace LegacyCodeSearcher
         private List<DirectoryItem> findChildrens()
         {
             return FileSearcher.GetFilesList(FullPath);
+        }
+
+        public override String ToString()
+        {
+            return Name;
         }
     }
 }
