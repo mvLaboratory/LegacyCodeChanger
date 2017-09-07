@@ -14,13 +14,12 @@ namespace LegacyCodeSearcher
             DirectoryStructure dirStructure = new DirectoryStructure(folder);
             List<String> result = new List<string>();
 
-            String[] textFilesRes = new String[] { "asp", "aspx", "css", "js", "cs" };
-            var fileList = dirStructure.Item.Childrens.SelectMany(item => item.Childrens.Where(child => (!child.IsFolder)));
+            String[] textFilesRes = new String[] { ".asp", ".aspx", ".css", ".js", ".cs" };
+            var fileList = dirStructure.ItemsList.Where(file => (!file.IsFolder && textFilesRes.Contains(file.Extension)));
 
             int counter = 0;
             foreach (DirectoryItem file in fileList)
             {
-                //Console.WriteLine("<== {0} ==>", file.FullPath);
 
                 if (file.FullPath.Contains("common.css"))
                 {
@@ -48,15 +47,10 @@ namespace LegacyCodeSearcher
                     Console.WriteLine(e.Message);
                 }
 
-                if (counter >= 50) 
+                if (counter >= 100) 
                     break;
             }
 
-            //List<String> files = new List<string>();
-
-            //FileSearcher fileSearcher = new FileSearcher();
-            //fileSearcher.DirectoryPath = folder;
-            //files = fileSearcher.GetFilesList();
 
             return result;
         }

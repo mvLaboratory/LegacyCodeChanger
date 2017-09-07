@@ -8,13 +8,15 @@ namespace LegacyCodeSearcher
         public String Name { get; set; }
         public String FullPath { get; set; }
         public bool IsFolder { get; set; }
+        public String Extension { get; set; }
         public IEnumerable<DirectoryItem> Childrens { get; }
 
-        public DirectoryItem(String name, String fullPath, bool isFolder)
+        public DirectoryItem(String name, String fullPath, bool isFolder, String extension)
         {
             Name = name;
             FullPath = fullPath;
             IsFolder = isFolder;
+            Extension = extension;
 
             if (FullPath == null)
             {
@@ -23,7 +25,12 @@ namespace LegacyCodeSearcher
             Childrens = isFolder ? findChildrens() : new List<DirectoryItem>();
         }
 
-        public DirectoryItem(String name, String fullPath) : this(name, fullPath, false)
+        public DirectoryItem(String name, String fullPath, bool isFolder) : this(name, fullPath, isFolder, "")
+        {
+
+        }
+
+        public DirectoryItem(String name, String fullPath) : this(name, fullPath, true)
         {          
         }
 

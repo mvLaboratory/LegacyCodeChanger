@@ -47,8 +47,8 @@
     <Compile Include="Models\Files\DirectoryStructure.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchFactory.cs" />
-    <Compile Include="TextSearcher.cs" />
+    <Compile Include="Files\SearchFactory.cs" />
+    <Compile Include="Files\TextSearcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

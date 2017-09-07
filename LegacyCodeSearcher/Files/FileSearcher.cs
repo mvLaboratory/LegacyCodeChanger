@@ -18,7 +18,7 @@ namespace LegacyCodeSearcher
                 dirs = Directory.GetDirectories(directoryPath);
             }
             catch (Exception ex)
-            { 
+            {
                 dirs = new String[] { };
             }
 
@@ -30,16 +30,33 @@ namespace LegacyCodeSearcher
             {
                 files = new String[] { };
             }
-            
-            result.AddRange(dirs.Select(item => new DirectoryItem(Path.GetFileName(item), item, true)));
-            result.AddRange(files.Select(item => new DirectoryItem(Path.GetFileName(item), item, false)));
+
+            result.AddRange(dirs.Select(item => new DirectoryItem(Path.GetFileName(item), item)));
+
+
+            result.AddRange(files.Select(item => {
+                FileInfo itemInfo = new FileInfo(item);
+                return new DirectoryItem(itemInfo.Name, item, false, itemInfo.Extension);
+                }
+            ));
 
             return result;
         }
 
         public static DirectoryItem CreateDirectoryItem(String folderPath)
         {
-            return new DirectoryItem(Path.GetFileName(folderPath), folderPath, File.GetAttributes(folderPath).HasFlag(FileAttributes.Directory));
+            FileInfo dirItemInfo = new FileInfo(folderPath);
+            return new DirectoryItem(Path.GetFileName(folderPath), folderPath, dirItemInfo.Attributes.HasFlag(FileAttributes.Directory), dirItemInfo.Extension);
+            
+        }
+
+        public static void FlatDirectoryItem(DirectoryItem item, List<DirectoryItem> result)
+        {
+            result.Add(item);
+            foreach(var childItem in item.Childrens)
+            {
+                FlatDirectoryItem(childItem, result);
+            }
         }
     }
 }
