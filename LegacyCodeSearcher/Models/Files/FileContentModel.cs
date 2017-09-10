@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LegacyCodeSearcher.Models.Files
+namespace LegacyCodeSearcher
 {
     class FileContent
     {
+        public DirectoryItem FileItem { get; set; }
+        public IEnumerable<String> InitialFileLines { get; set; }
     }
 }
