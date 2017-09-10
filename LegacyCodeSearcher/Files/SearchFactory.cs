@@ -15,6 +15,19 @@ namespace LegacyCodeSearcher
             }
         }
 
+        public static FileReader FileReader
+        {
+            get
+            {
+                if (_fileReader == null)
+                {
+                    _fileReader = new FileReader();
+                }
+                return _fileReader;
+            }
+        }
+
         private static TextSearcher _textSearcher;
+        private static FileReader _fileReader;
     }
 }

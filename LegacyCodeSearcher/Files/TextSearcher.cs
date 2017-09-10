@@ -20,34 +20,34 @@ namespace LegacyCodeSearcher
             int counter = 0;
             foreach (DirectoryItem file in fileList)
             {
+                FileContentModel fileContent = SearchFactory.FileReader.readFile(file);
+                //if (file.FullPath.Contains("common.css"))
+                //{
+                //    Console.WriteLine("/n/n ");
+                //}
+                //try
+                //{   // Open the text file using a stream reader.
+                //    using (StreamReader sr = new StreamReader(file.FullPath))
+                //    {
+                //        String line;
+                //        // Read the stream to a string, and write the string to the console.
+                //        while ((line = sr.ReadLine()) != null) {
+                //            if (line.ToLower().Contains(serchedText.ToLower()))
+                //            {
 
-                if (file.FullPath.Contains("common.css"))
-                {
-                    Console.WriteLine("/n/n ");
-                }
-                try
-                {   // Open the text file using a stream reader.
-                    using (StreamReader sr = new StreamReader(file.FullPath))
-                    {
-                        String line;
-                        // Read the stream to a string, and write the string to the console.
-                        while ((line = sr.ReadLine()) != null) {
-                            if (line.ToLower().Contains(serchedText.ToLower()))
-                            {
-
-                                Console.WriteLine("{0} - {1}", file, line.Trim());
-                                ++counter;
-                            }
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("The file could not be read:");
-                    Console.WriteLine(e.Message);
-                }
-
-                if (counter >= 100) 
+                //                Console.WriteLine("{0} - {1}", file, line.Trim());
+                //                ++counter;
+                //            }
+                //        }
+                //    }
+                //}
+                //catch (Exception e)
+                //{
+                //    Console.WriteLine("The file could not be read:");
+                //    Console.WriteLine(e.Message);
+                //}
+                ++counter;
+                if (counter >= 10) 
                     break;
             }
 
